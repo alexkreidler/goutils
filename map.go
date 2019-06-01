@@ -86,3 +86,11 @@ func (cm *ConcurrentMap) Iter() <-chan ConcurrentMapItem {
 
 	return c
 }
+
+// Value safely returns the current value of the concurrent map
+func (cm *ConcurrentMap) Value() map[string]interface{} {
+	cm.Lock()
+	defer cm.Unlock()
+
+	return cm.items
+}

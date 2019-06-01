@@ -75,3 +75,11 @@ func (cs *ConcurrentSlice) Iter() <-chan ConcurrentSliceItem {
 
 	return c
 }
+
+// Value safely returns the current value of the concurrent slice
+func (cs *ConcurrentSlice) Value() []interface{} {
+	cs.Lock()
+	defer cs.Unlock()
+
+	return cs.items
+}
